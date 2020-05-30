@@ -74,3 +74,13 @@ a {
 .gallery-image {
     width: 30%;
 }
+
+.home-card {
+    max-width: 500px;
+    margin: 20px auto;
+    height: max-content;
+}
+
+.home-favorite {
+    color: #ed4956;
+}
