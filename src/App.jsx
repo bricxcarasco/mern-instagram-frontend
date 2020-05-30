@@ -1,10 +1,10 @@
 import React from 'react';
-import Navbar from './components/templates/Navbar';
-import './App.css'
 import { BrowserRouter, Route } from 'react-router-dom';
-import Signin from './components/pages/Signin';
-import Signup from './components/pages/Signup';
+import './App.css'
+import Navbar from './components/templates/Navbar';
 import Home from './components/pages/Home';
+import Signup from './components/pages/Signup';
+import Signin from './components/pages/Signin';
 import Profile from './components/pages/Profile';
 
 function App() {
