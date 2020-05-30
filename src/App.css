@@ -40,3 +40,37 @@ a {
     border-bottom: 1px solid #095ff4 !important;
     box-shadow: 0 1px 0 0 #095ff4 !important;
 }
+
+.main-profile {
+    max-width: 550px;
+    margin: 0px auto;
+}
+
+.profile {
+    display: flex;
+    justify-content: space-around;
+    margin: 18px 0px;
+    border-bottom: 1px solid grey;
+}
+
+.profile-picture {
+    width: 160px;
+    height: 160px;
+    border-radius: 80px;
+}
+
+.profile-count {
+    display: flex;
+    justify-content: space-between;
+    width: 108%;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.gallery-image {
+    width: 30%;
+}
