@@ -9,7 +9,7 @@ const Signup = () => {
                 <input type="text" placeholder="Full Name"/>
                 <input type="text" placeholder="Email Address"/>
                 <input type="password" placeholder="Password" />
-                <button className="btn waves-effect waves-light #64b5f6 blue lighten-2">Sign up</button>
+                <button className="btn waves-effect waves-light #64b5f6 blue darken-2">Sign up</button>
             </div>
 
             <div className="card auth-card-account input-field">

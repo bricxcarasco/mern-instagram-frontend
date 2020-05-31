@@ -8,7 +8,7 @@ const Signin = () => {
                 <h2>Instagram</h2>
                 <input type="text" placeholder="Email Address"/>
                 <input type="password" placeholder="Password" />
-                <button className="btn waves-effect waves-light #64b5f6 blue lighten-2">Log In</button>
+                <button className="btn waves-effect waves-light #64b5f6 blue darken-2">Log In</button>
             </div>
 
             <div className="card auth-card-account input-field">

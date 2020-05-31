@@ -84,3 +84,10 @@ a {
 .home-favorite {
     color: #ed4956;
 }
+
+.create-post {
+    margin: 30px auto;
+    max-width: 500px;
+    padding: 20px;
+    text-align: center;
+}
