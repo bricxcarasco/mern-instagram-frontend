@@ -17,7 +17,7 @@ const Signup = () => {
         if (!validateEmailAddress(email)) {
             M.toast({
                 html: "Invalid email adress format", 
-                classes:"#e53935 red darken-1"
+                classes: "#e53935 red darken-1"
             });
             return;
         }
@@ -38,7 +38,7 @@ const Signup = () => {
             if (data.error) {
                 M.toast({
                     html: data.error, 
-                    classes:"#e53935 red darken-1"
+                    classes: "#e53935 red darken-1"
                 });
             } else {
                 M.toast({
@@ -47,6 +47,9 @@ const Signup = () => {
                 });
                 history.push('/signin');
             }
+        })
+        .catch(error => {
+            console.log(error);
         });
     }
 
