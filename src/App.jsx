@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import React, { useEffect, createContext, useReducer, useContext } from 'react';
+import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
 import './App.css'
 import Navbar from './components/templates/Navbar';
 import Home from './components/pages/Home';
@@ -7,11 +7,28 @@ import Signup from './components/pages/Signup';
 import Signin from './components/pages/Signin';
 import Profile from './components/pages/Profile';
 import CreatePost from './components/pages/CreatePost';
+import { reducer, initialState } from './reducers/userReducer';
 
-function App() {
+export const UserContext = createContext();
+
+const Routing = () => {
+	const history = useHistory();
+	const { state, dispatch } = useContext(UserContext);
+	useEffect(() => {
+		const user = JSON.parse(localStorage.getItem("user"));
+		if (user) {
+			dispatch({
+				type: "USER",
+				payload: user
+			});
+			history.push('/');
+		} else {
+			history.push('/signin');
+		}
+	},[]);
+
 	return (
-		<BrowserRouter>
-			<Navbar />
+		<Switch>
 			<Route path="/" exact>
 				<Home />
 			</Route>
@@ -27,7 +44,19 @@ function App() {
 			<Route path="/create">
 				<CreatePost />
 			</Route>
-		</BrowserRouter>
+		</Switch>
+	);
+}
+
+function App() {
+	const [state, dispatch] = useReducer(reducer, initialState);
+	return (
+		<UserContext.Provider value={{ state, dispatch }}>
+			<BrowserRouter>
+				<Navbar />
+				<Routing />
+			</BrowserRouter>
+		</UserContext.Provider>
 	);
 }
 
