@@ -1,46 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import Post from '../templates/Post';
 
 const Home = () => {
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        fetch('/allpost', {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("jwt")}`
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.posts);
+            setPosts(data.posts);
+        })
+        .catch(error => console.log(error));
+    }, []);
+
     return (
         <div className="home">
-            <div className="card home-card">
-                <h5>iambricxrain</h5>
-                <div className="card-image">
-                    <img src="https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80" alt=""/>
-                </div>
-                <div className="card-content">
-                    <i className="material-icons home-favorite">favorite</i>
-                    <h6>Title</h6>
-                    <p>This is a instagram clone post</p>
-                    <input type="text" placeholder="Add a comment..."/>
-                </div>
-            </div>
-
-            <div className="card home-card">
-                <h5>iambricxrain</h5>
-                <div className="card-image">
-                    <img src="https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80" alt=""/>
-                </div>
-                <div className="card-content">
-                    <i className="material-icons home-favorite">favorite</i>
-                    <h6>Title</h6>
-                    <p>This is a instagram clone post</p>
-                    <input type="text" placeholder="Add a comment..."/>
-                </div>
-            </div>
-
-            <div className="card home-card">
-                <h5>iambricxrain</h5>
-                <div className="card-image">
-                    <img src="https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80" alt=""/>
-                </div>
-                <div className="card-content">
-                    <i className="material-icons home-favorite">favorite</i>
-                    <h6>Title</h6>
-                    <p>This is a instagram clone post</p>
-                    <input type="text" placeholder="Add a comment..."/>
-                </div>
-            </div>
+            { posts ? posts.map((post, index) => <Post key={post._id} post={post} /> ) : '' }
         </div>
     );
 }
