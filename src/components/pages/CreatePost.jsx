@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import M from 'materialize-css';
 
@@ -9,6 +9,12 @@ const CreatePost = () => {
     const [body, setBody] = useState("");
     const [image, setImage] = useState("");
     const [imageUrl, setImageUrl] = useState("");
+
+    useEffect(() => {
+        if (imageUrl) {
+            sendPost(imageUrl);
+        }
+    }, [imageUrl]);
 
     const sendImage = () => {
         const imageForm = new FormData();
@@ -22,7 +28,6 @@ const CreatePost = () => {
         .then(response => response.json())
         .then(data => {
             setImageUrl(data.secure_url);
-            sendPost();
         })
         .catch(error => {
             console.log(error);
@@ -33,7 +38,8 @@ const CreatePost = () => {
         fetch('/createpost', {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("jwt")}`
             },
             body: JSON.stringify({
                 title,
