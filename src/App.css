@@ -81,8 +81,22 @@ a {
     height: max-content;
 }
 
+.home-buttons i {
+    padding: 0 4px;
+}
+
 .home-favorite {
+    padding-left: 0px !important;
     color: #ed4956;
+}
+
+.home-thumb {
+    color: #0745b1;
+}
+
+.home-thumb:hover {
+    cursor: pointer;
+    color: #095ff4;
 }
 
 .create-post {

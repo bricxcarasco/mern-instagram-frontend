@@ -4,6 +4,60 @@ import Post from '../templates/Post';
 const Home = () => {
     const [posts, setPosts] = useState([]);
 
+    const likePost = (postId) => {
+        fetch('/like', {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("jwt")}`
+            },
+            body: JSON.stringify({
+                postId
+            })
+        })
+        .then(response => response.json())
+        .then(result => {
+            const newPosts = posts.map(post => {
+                if (post._id === result._id) {
+                    return result;
+                } else {
+                    return post;
+                }
+            });
+            setPosts(newPosts);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
+
+    const unlikePost = (postId) => {
+        fetch('/unlike', {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("jwt")}`
+            },
+            body: JSON.stringify({
+                postId
+            })
+        })
+        .then(response => response.json())
+        .then(result => {
+            const newPosts = posts.map(post => {
+                if (post._id === result._id) {
+                    return result;
+                } else {
+                    return post;
+                }
+            });
+            setPosts(newPosts);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
+
     useEffect(() => {
         const user = localStorage.getItem("user");
         if (user) {
@@ -22,7 +76,7 @@ const Home = () => {
 
     return (
         <div className="home">
-            { posts ? posts.map((post, index) => <Post key={post._id} post={post} /> ) : '' }
+            { posts ? posts.map((post, index) => <Post key={post._id} post={post} like={likePost} unlike={unlikePost} /> ) : '' }
         </div>
     );
 }
