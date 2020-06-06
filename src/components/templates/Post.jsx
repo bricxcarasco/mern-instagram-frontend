@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { UserContext } from '../../App';
 
 const Post = (props) => {
     const { state, dispatch } = useContext(UserContext);
-    const { _id, title, likes, body, photo, postedBy } = props.post;
+    const { _id, title, likes, comments, body, photo, postedBy } = props.post;
+    const [comment, setComment] = useState("");
 
     const clickLike = () => {
         props.like(_id);
@@ -11,6 +12,10 @@ const Post = (props) => {
 
     const clickUnlike = () => {
         props.unlike(_id);
+    }
+
+    const postComment = () => {
+        props.comment(comment, _id);
     }
 
     return (
@@ -31,7 +36,24 @@ const Post = (props) => {
                 <h6>{likes.length} { likes.length <= 1 ? 'like' : 'likes'}</h6>
                 <h6>{title}</h6>
                 <p>{body}</p>
-                <input type="text" placeholder="Add a comment..."/>
+                {
+                    comments.map(comment => {
+                        return (
+                            <div key={comment._id}>
+                                <h6><b>{comment.postedBy.name}</b> {comment.text}</h6>
+                            </div>
+                        );
+                    })
+                }
+                <form onSubmit={(event) => {
+                    event.preventDefault();
+                    postComment();
+                }}>
+                    <div className="post-comment-section">
+                        <input value={comment} onChange={(event) => setComment(event.target.value)} type="text" placeholder="Add a comment..." />
+                        {/* <button>File</button> */}
+                    </div>
+                </form>
             </div>
         </div>
     );

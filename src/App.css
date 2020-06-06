@@ -99,6 +99,16 @@ a {
     color: #095ff4;
 }
 
+.post-comment-section {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-comment-section span {
+    margin-left: 10px;
+}
+
+
 .create-post {
     margin: 30px auto;
     max-width: 500px;

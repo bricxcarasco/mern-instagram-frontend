@@ -58,6 +58,34 @@ const Home = () => {
         });
     }
 
+    const makeComment = (comment, postId) => {
+        fetch('/comment', {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("jwt")}`
+            },
+            body: JSON.stringify({
+                comment,
+                postId
+            })
+        })
+        .then(response => response.json())
+        .then(result => {
+            const newComment = posts.map(post => {
+                if (post._id === result._id) {
+                    return result;
+                } else {
+                    return post;
+                }
+            });
+            setPosts(newComment);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
+
     useEffect(() => {
         const user = localStorage.getItem("user");
         if (user) {
@@ -76,7 +104,7 @@ const Home = () => {
 
     return (
         <div className="home">
-            { posts ? posts.map((post, index) => <Post key={post._id} post={post} like={likePost} unlike={unlikePost} /> ) : '' }
+            { posts ? posts.map((post, index) => <Post key={post._id} post={post} like={likePost} unlike={unlikePost} comment={makeComment}/> ) : '' }
         </div>
     );
 }
