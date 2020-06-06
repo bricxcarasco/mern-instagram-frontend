@@ -5,17 +5,19 @@ const Home = () => {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        fetch('/allpost', {
-            headers: {
-                "Authorization": `Bearer ${localStorage.getItem("jwt")}`
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data.posts);
-            setPosts(data.posts);
-        })
-        .catch(error => console.log(error));
+        const user = localStorage.getItem("user");
+        if (user) {
+            fetch('/allpost', {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("jwt")}`
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                setPosts(data.posts);
+            })
+            .catch(error => console.log(error));
+        }
     }, []);
 
     return (
