@@ -90,6 +90,17 @@ a {
     color: #ed4956;
 }
 
+.home-delete {
+    padding-left: 0px !important;
+    color: #ed4956;
+}
+
+.home-delete:hover {
+    cursor: pointer;
+    color: #da1b2b;
+}
+
+
 .home-thumb {
     color: #0745b1;
 }

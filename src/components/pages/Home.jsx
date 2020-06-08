@@ -86,10 +86,29 @@ const Home = () => {
         });
     }
 
+    const deletePost = (postId) => {
+        fetch(`/delete-post/${postId}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("jwt")}`
+            }
+        })
+        .then(response => response.json())
+        .then(result => {
+            const newPosts = posts.filter(post => {
+                return post._id !== result._id;
+            });
+            setPosts(newPosts);
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }
+
     useEffect(() => {
         const user = localStorage.getItem("user");
         if (user) {
-            fetch('/allpost', {
+            fetch('/posts', {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("jwt")}`
                 }
@@ -104,7 +123,7 @@ const Home = () => {
 
     return (
         <div className="home">
-            { posts ? posts.map((post, index) => <Post key={post._id} post={post} like={likePost} unlike={unlikePost} comment={makeComment}/> ) : '' }
+            { posts ? posts.map((post, index) => <Post key={post._id} post={post} like={likePost} unlike={unlikePost} comment={makeComment} delete={deletePost}/> ) : '' }
         </div>
     );
 }

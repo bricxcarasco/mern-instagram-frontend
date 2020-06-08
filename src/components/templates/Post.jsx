@@ -18,9 +18,13 @@ const Post = (props) => {
         props.comment(comment, _id);
     }
 
+    const deletePost = () => {
+        props.delete(_id);
+    }
+
     return (
         <div className="card home-card">
-            <h5>{postedBy.name}</h5>
+            <h5>{postedBy.name} {postedBy._id === state._id && <i className="material-icons right home-delete" onClick={deletePost}>delete</i>} </h5>
             <div className="card-image">
                 <img src={`${photo}`} alt=""/>
             </div>

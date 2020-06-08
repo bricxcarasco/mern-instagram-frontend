@@ -35,7 +35,7 @@ const CreatePost = () => {
     }
 
     const sendPost = () => {
-        fetch('/createpost', {
+        fetch('/create-post', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

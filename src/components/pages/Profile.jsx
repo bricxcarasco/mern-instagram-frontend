@@ -6,7 +6,7 @@ const Profile = () => {
     const [myPostImage, setMyPostImage] = useState([]);
 
     useEffect(() => {
-        fetch('/mypost', {
+        fetch('/my-post', {
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("jwt")}`
             }
