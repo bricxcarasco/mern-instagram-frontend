@@ -19,7 +19,11 @@ const Post = (props) => {
     }
 
     const deletePost = () => {
-        props.delete(_id);
+        props.delete_post(_id);
+    }
+
+    const deleteComment = (commentId) => {
+        props.delete_comment(_id, commentId);
     }
 
     return (
@@ -43,8 +47,12 @@ const Post = (props) => {
                 {
                     comments.map(comment => {
                         return (
-                            <div key={comment._id}>
-                                <h6><b>{comment.postedBy.name}</b> {comment.text}</h6>
+                            <div key={ comment._id }>
+                                <h6>
+                                    <b>{ comment.postedBy.name}</b> 
+                                    { comment.text } 
+                                    { comment.postedBy._id === state._id && <i className="material-icons right home-delete" onClick={() => deleteComment(comment._id)}>delete</i> }
+                                </h6>
                             </div>
                         );
                     })
@@ -55,7 +63,6 @@ const Post = (props) => {
                 }}>
                     <div className="post-comment-section">
                         <input value={comment} onChange={(event) => setComment(event.target.value)} type="text" placeholder="Add a comment..." />
-                        {/* <button>File</button> */}
                     </div>
                 </form>
             </div>
