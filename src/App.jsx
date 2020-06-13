@@ -1,19 +1,21 @@
 import React, { useEffect, createContext, useReducer, useContext } from 'react';
 import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
 import './App.css'
+import { reducer, initialState } from './reducers/userReducer';
 import Navbar from './components/templates/Navbar';
 import Home from './components/pages/Home';
 import Signup from './components/pages/Signup';
 import Signin from './components/pages/Signin';
 import Profile from './components/pages/Profile';
 import CreatePost from './components/pages/CreatePost';
-import { reducer, initialState } from './reducers/userReducer';
+import UserProfile from './components/pages/UserProfile';
 
 export const UserContext = createContext();
 
 const Routing = () => {
 	const history = useHistory();
-	const { state, dispatch } = useContext(UserContext);
+	const { dispatch } = useContext(UserContext);
+
 	useEffect(() => {
 		const user = JSON.parse(localStorage.getItem("user"));
 		if (user) {
@@ -37,8 +39,11 @@ const Routing = () => {
 			<Route path="/signup">
 				<Signup />
 			</Route>
-			<Route path="/profile">
+			<Route path="/profile" exact>
 				<Profile />
+			</Route>
+			<Route path="/profile/:id">
+				<UserProfile />
 			</Route>
 			<Route path="/create">
 				<CreatePost />

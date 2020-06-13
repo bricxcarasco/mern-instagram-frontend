@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { UserContext } from '../../App';
 
 const Profile = () => {
-    const { state, dispatch } = useContext(UserContext);
+    const { state } = useContext(UserContext);
     const [myPostImage, setMyPostImage] = useState([]);
 
     useEffect(() => {

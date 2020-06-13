@@ -119,7 +119,6 @@ a {
     margin-left: 10px;
 }
 
-
 .create-post {
     margin: 30px auto;
     max-width: 500px;
@@ -131,4 +130,9 @@ a {
     top: 30px !important;
     right: 20px !important;
     left: auto !important;
+}
+
+.user-profile-loading {
+    font-family: 'Grand Hotel', cursive;
+    margin: 50px auto;
 }

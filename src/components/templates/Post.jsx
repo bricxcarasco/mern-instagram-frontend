@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { UserContext } from '../../App';
 
 const Post = (props) => {
-    const { state, dispatch } = useContext(UserContext);
+    const { state } = useContext(UserContext);
     const { _id, title, likes, comments, body, photo, postedBy } = props.post;
     const [comment, setComment] = useState("");
 
@@ -28,7 +29,13 @@ const Post = (props) => {
 
     return (
         <div className="card home-card">
-            <h5>{postedBy.name} {postedBy._id === state._id && <i className="material-icons right home-delete" onClick={deletePost}>delete</i>} </h5>
+            <h5>
+                <Link to={postedBy._id !== state._id ? `/profile/${postedBy._id}` : `/profile` }>{ postedBy.name }</Link> 
+                { postedBy._id === state._id && <i 
+                                                    className="material-icons right home-delete" 
+                                                    onClick={deletePost}>delete
+                                                </i> }
+            </h5>
             <div className="card-image">
                 <img src={`${photo}`} alt=""/>
             </div>
