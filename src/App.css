@@ -136,3 +136,7 @@ a {
     font-family: 'Grand Hotel', cursive;
     margin: 50px auto;
 }
+
+.follow-button {
+    font-weight: bold;
+}
