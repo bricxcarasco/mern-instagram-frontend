@@ -29,10 +29,11 @@ const Post = (props) => {
 
     return (
         <div className="card home-card">
-            <h5>
+            <h5 className="post-name">
                 <Link to={postedBy._id !== state._id ? `/profile/${postedBy._id}` : `/profile` }>{ postedBy.name }</Link> 
                 { postedBy._id === state._id && <i 
                                                     className="material-icons right home-delete" 
+                                                    title="Delete Post"
                                                     onClick={deletePost}>delete
                                                 </i> }
             </h5>
@@ -56,9 +57,9 @@ const Post = (props) => {
                         return (
                             <div key={ comment._id }>
                                 <h6>
-                                    <b>{ comment.postedBy.name}</b> 
+                                    <b>{ comment.postedBy.name} </b> 
                                     { comment.text } 
-                                    { comment.postedBy._id === state._id && <i className="material-icons right home-delete" onClick={() => deleteComment(comment._id)}>delete</i> }
+                                    { comment.postedBy._id === state._id && <i className="material-icons right home-delete" title="Delete Comment" onClick={() => deleteComment(comment._id)}>delete</i> }
                                 </h6>
                             </div>
                         );

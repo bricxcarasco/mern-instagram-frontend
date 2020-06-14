@@ -9,7 +9,7 @@ const UserProfile = () => {
 
     const [ userPost, setUserPost ] = useState([]);
     const [ user, setUser ] = useState({});
-    const [ isFollow, setIsFollow ] = useState(false);
+    const [ isFollow, setIsFollow ] = useState(JSON.parse(localStorage.getItem("user")).following.includes(id));
     const [ followingText, setFollowingText ] = useState("Following");
 
     useEffect(() => {
@@ -22,9 +22,6 @@ const UserProfile = () => {
         .then(profile => {
             setUser(profile.user);
             setUserPost(profile.posts);
-            if (profile.user.followers.includes(JSON.parse(localStorage.getItem("user"))._id)) {
-                setIsFollow(true);
-            }
         })
         .catch(error => {
             console.log(error);
@@ -86,7 +83,6 @@ const UserProfile = () => {
         })
         .then(response => response.json())
         .then(result => {
-            console.log(result);
             dispatch({
                 type: "UPDATE",
                 payload: {

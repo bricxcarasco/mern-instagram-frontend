@@ -4,7 +4,6 @@ import { UserContext } from '../../App';
 const Profile = () => {
     const { state } = useContext(UserContext);
     const [myPostImage, setMyPostImage] = useState([]);
-    console.log(state);
 
     useEffect(() => {
         fetch('/my-post', {
@@ -32,6 +31,7 @@ const Profile = () => {
                         </div>
                         <div>
                             <h4>{ state.name }</h4>
+                            <h5>{ state.email }</h5>
                             <div className="profile-count">
                                 <h6>{ myPostImage.length } posts</h6>
                                 <h6>{ state.followers.length } followers</h6>

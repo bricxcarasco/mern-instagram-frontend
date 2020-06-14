@@ -9,6 +9,7 @@ import Signin from './components/pages/Signin';
 import Profile from './components/pages/Profile';
 import CreatePost from './components/pages/CreatePost';
 import UserProfile from './components/pages/UserProfile';
+import UserFollowingPost from './components/pages/UserFollowingPost';
 
 export const UserContext = createContext();
 
@@ -47,6 +48,9 @@ const Routing = () => {
 			</Route>
 			<Route path="/create">
 				<CreatePost />
+			</Route>
+			<Route path="/following">
+				<UserFollowingPost />
 			</Route>
 		</Switch>
 	);
