@@ -1,20 +1,47 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import M from 'materialize-css';
+import { useEffect } from 'react';
 
 const Signup = () => {
     const history = useHistory();
 
-    const [name, setName] = useState("");
-    const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
+    const [ name, setName ] = useState("");
+    const [ password, setPassword ] = useState("");
+    const [ email, setEmail ] = useState("");
+    const [ image, setImage ] = useState("");
+    const [ imageUrl, setImageUrl ] = useState(undefined);
+
+    useEffect(() => {
+        if (imageUrl) {
+            uploadUserInformation();
+        }
+    });
 
     const validateEmailAddress = (email) => {
         // eslint-disable-next-line
         return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
     }
 
-    const postCredential = () => {
+    const uploadProfilePicture = () => {
+        const imageForm = new FormData();
+        imageForm.append("file", image);
+        imageForm.append("upload_preset", "instagram-clone");
+        imageForm.append("cloud_name", "gss-bricx-carasco");
+        fetch(process.env.REACT_APP_IMAGE_BUCKET_API, {
+            method: "POST",
+            body: imageForm
+        })
+        .then(response => response.json())
+        .then(data => {
+            setImageUrl(data.secure_url);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
+
+    const uploadUserInformation = () => {
         if (!validateEmailAddress(email)) {
             M.toast({
                 html: "Invalid email adress format", 
@@ -31,7 +58,8 @@ const Signup = () => {
             body: JSON.stringify({
                 name,
                 password,
-                email
+                email,
+                imageUrl
             })
         })
         .then(response => response.json())
@@ -52,6 +80,14 @@ const Signup = () => {
         .catch(error => {
             console.log(error);
         });
+    }
+
+    const postCredential = () => {
+        if (image) {
+            uploadProfilePicture();
+        } else {
+            uploadUserInformation();
+        }
     }
 
     return (
@@ -79,6 +115,19 @@ const Signup = () => {
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
                     />
+                
+                <div className="file-field input-field">
+                    <div className="btn #64b5f6 blue darken-2">
+                        <span>Profile Pic</span>
+                        <input 
+                            type="file" 
+                            onChange={event => setImage(event.target.files[0])}
+                            />
+                    </div>
+                    <div className="file-path-wrapper">
+                        <input className="file-path validate" type="text" />
+                    </div>
+                </div>
                     
                 <button 
                     onClick={() => postCredential()} 

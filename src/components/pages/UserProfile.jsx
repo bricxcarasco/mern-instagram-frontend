@@ -112,7 +112,10 @@ const UserProfile = () => {
                 <div className="main-profile">
                     <div className="profile">
                         <div>
-                            <img className="profile-picture" src="https://images.unsplash.com/photo-1551179939-b839002d0a18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80" alt=""/>
+                            <img 
+                                className="profile-picture" 
+                                src={user.photo} 
+                                alt={user.name}/>
                         </div>
                         <div>
                             <h5>
@@ -144,7 +147,11 @@ const UserProfile = () => {
                         {
                             userPost.map(post => {
                                 return (
-                                    <img key={post._id} className="gallery-image" src={post.photo} alt={post.title}/>
+                                    <img 
+                                        key={post._id} 
+                                        className="gallery-image" 
+                                        src={post.photo} 
+                                        alt={post.title}/>
                                 );
                             })
                         }

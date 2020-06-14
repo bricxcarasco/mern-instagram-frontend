@@ -3,7 +3,7 @@ import { UserContext } from '../../App';
 
 const Profile = () => {
     const { state } = useContext(UserContext);
-    const [myPostImage, setMyPostImage] = useState([]);
+    const [ myPostImage, setMyPostImage ] = useState([]);
 
     useEffect(() => {
         fetch('/my-post', {
@@ -27,7 +27,10 @@ const Profile = () => {
                 <div className="main-profile">
                     <div className="profile">
                         <div>
-                            <img className="profile-picture" src="https://images.unsplash.com/photo-1551179939-b839002d0a18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80" alt=""/>
+                            <img 
+                                className="profile-picture" 
+                                src={state.photo} 
+                                alt={state.name}/>
                         </div>
                         <div>
                             <h4>{ state.name }</h4>
@@ -43,7 +46,11 @@ const Profile = () => {
                         {
                             myPostImage.map(mypost => {
                                 return (
-                                    <img key={mypost._id} className="gallery-image" src={mypost.photo} alt={mypost.title}/>
+                                    <img 
+                                        key={mypost._id} 
+                                        className="gallery-image" 
+                                        src={mypost.photo} 
+                                        alt={mypost.title}/>
                                 );
                             })
                         }
