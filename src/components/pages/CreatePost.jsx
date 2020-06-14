@@ -14,7 +14,7 @@ const CreatePost = () => {
         if (imageUrl) {
             sendPost(imageUrl);
         }
-    }, [imageUrl]);
+    }, []);
 
     const sendImage = () => {
         const imageForm = new FormData();

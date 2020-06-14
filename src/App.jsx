@@ -26,7 +26,7 @@ const Routing = () => {
 		} else {
 			history.push('/signin');
 		}
-	},[]);
+	},[dispatch, history]);
 
 	return (
 		<Switch>

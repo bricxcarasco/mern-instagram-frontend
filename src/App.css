@@ -138,5 +138,18 @@ a {
 }
 
 .follow-button {
+    width: 115px;
+    margin-left: 20px;
     font-weight: bold;
+}
+
+.following-button {
+    width: 115px;
+    margin-left: 20px;
+    font-weight: bold;
+    position: relative;
+}
+
+.following-button:hover {
+    background-color: #ed4956 !important;
 }
