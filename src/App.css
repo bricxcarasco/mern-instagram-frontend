@@ -65,6 +65,16 @@ a {
     width: 108%;
 }
 
+.profile-upload-pic {
+    text-align: center;
+    margin: 12px;
+}
+
+.profile-upload-pic-btn {
+    height: 32.4px !important;
+    line-height: 32.4px !important;
+}
+
 .gallery {
     display: flex;
     flex-wrap: wrap;
