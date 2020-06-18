@@ -14,6 +14,7 @@ const CreatePost = () => {
         if (imageUrl) {
             sendPost(imageUrl);
         }
+    // eslint-disable-next-line 
     }, [imageUrl]);
 
     const sendImage = () => {
