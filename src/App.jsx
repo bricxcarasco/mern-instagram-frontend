@@ -6,11 +6,12 @@ import Navbar from './components/templates/Navbar';
 import Home from './components/pages/Home';
 import Signup from './components/pages/Signup';
 import Signin from './components/pages/Signin';
+import ResetPassword from './components/pages/ResetPassword';
+import NewPassword from './components/pages/NewPassword';
 import Profile from './components/pages/Profile';
 import CreatePost from './components/pages/CreatePost';
 import UserProfile from './components/pages/UserProfile';
 import UserFollowingPost from './components/pages/UserFollowingPost';
-import ResetPassword from './components/pages/ResetPassword';
 
 export const UserContext = createContext();
 
@@ -45,6 +46,9 @@ const Routing = () => {
 			</Route>
 			<Route path="/reset-password" exact>
 				<ResetPassword />
+			</Route>
+			<Route path="/reset-password/:token">
+				<NewPassword />
 			</Route>
 			<Route path="/profile" exact>
 				<Profile />
