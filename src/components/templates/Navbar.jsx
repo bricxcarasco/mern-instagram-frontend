@@ -11,6 +11,7 @@ const Navbar = () => {
     const [ searchUser, setSearchUser ] = useState("");
     const [ usersList, setUsersList ] = useState([]);
     const searchModal = useRef(null);
+    const mobileNavbar = useRef(null);
 
     const logoutFunction = () => {
         localStorage.clear();
@@ -23,6 +24,13 @@ const Navbar = () => {
     const resetSearchStrings = () => {
         setSearchUser("");
         setUsersList([]);
+    }
+
+    const closeNavbar = () => {
+        let instance = M.Sidenav.getInstance(mobileNavbar.current);
+        if (instance.isOpen) {
+            instance.close();
+        }
     }
 
     const closeModal = () => {
@@ -65,27 +73,6 @@ const Navbar = () => {
                 <li key="4">
                     <button 
                     className="btn #c62828 red darken-3"
-                    onClick={() => logoutFunction()}>Logout</button>
-                </li>
-            ];
-        } else {
-            return [
-                <li key="5"><Link to="/signin">Signin</Link></li>,
-                <li key="6"><Link to="/signup">Signup</Link></li>
-            ];
-        }
-    }
-
-    const renderListMobile = () => {
-        if (state) {
-            return [
-                <li key="0"><a href="false"><i className="large material-icons">search</i></a></li>,
-                <li key="1"><a href="/following">Posts</a></li>,
-                <li key="2"><a href="/profile">Profile</a></li>,
-                <li key="3"><a href="/create">Create Post</a></li>,
-                <li key="4">
-                    <button 
-                    className="btn #c62828 red darken-3 btn-logout"
                     onClick={() => logoutFunction()}>Logout</button>
                 </li>
             ];
@@ -159,11 +146,11 @@ const Navbar = () => {
                 </div>
             </div>
 
-                <ul className="sidenav" id="mobile-demo">
-                    {
-                        renderListMobile()
-                    }
-                </ul>
+            <ul className="sidenav" id="mobile-demo" onClick={closeNavbar} ref={mobileNavbar}>
+                {
+                    renderList()
+                }
+            </ul>
 
             {
                 document.addEventListener('DOMContentLoaded', () => {
